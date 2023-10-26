@@ -5,14 +5,14 @@
  Vinted Enriched
 </h1>
 
-Built using TypeScript
+Free and open source browser extension to show additional info of vinted product built in Typescript.
 
 # Table of contents
 
 - [Table of contents](#table-of-contents)
+- [Motivation](#motivation)
 - [Usage](#usage)
 - [Development](#development)
-- [Contribute](#contribute)
 
 
 # Motivation
