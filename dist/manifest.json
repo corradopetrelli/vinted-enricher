@@ -1,0 +1,40 @@
+{
+  "name": "Vinted Enricher",
+  "version": "0.0.1",
+  "description": "Free, open source, and privacy-focused browser extension to block \"not safe for work\" content.",
+  "author": "Navendu Pottekkat",
+  "permissions": ["<all_urls>", "storage"],
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/content.js"],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "64": "images/icon64.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "Vinted Enricher",
+    "default_popup": "src/popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": ["images/*"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

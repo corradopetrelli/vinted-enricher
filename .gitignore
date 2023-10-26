@@ -1,0 +1,7 @@
+src/popup/.DS_Store
+src/.DS_Store
+.cache
+dist/src
+node_modules
+dev
+.DS_Store
