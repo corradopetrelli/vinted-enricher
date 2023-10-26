@@ -1,6 +1,9 @@
-# Vinted Enriched
-
-Free and open source browser extension to show additional info of vinted product.
+<p align="center">
+  <img width="180" src="logo.png" />
+</p>
+<h1 align="center">
+ Vinted Enriched
+</h1>
 
 Built using TypeScript
 
