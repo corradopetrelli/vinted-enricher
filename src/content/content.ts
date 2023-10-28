@@ -1,27 +1,58 @@
-import { IntegratorUser } from "./Filter/IntegratorUser";
+import { IntegratorUser } from './Filter/IntegratorUser'
+
+const CARD_CLASS = 'feed-grid__item'
+const USER_SELECTOR = '.new-item-box__container .web_ui__Cell__cell.web_ui__Cell__narrow.web_ui__Cell__link'
+const PRODUCT_SELECTOR =
+  '.feed-grid__item-content > .u-flex-grow.u-fill-width > .new-item-box__container .new-item-box__overlay'
+const integratorUser = new IntegratorUser()
 
 const init = (): void => {
-  const integratorUser = new IntegratorUser();
-  if (window.location.href.indexOf("www.vinted.it/catalog") > -1) {
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(execute, 5000);
-    });
-  }
-};
+  firstEnrichment()
+  observeCatalog()
+}
 
-const execute = (): void => {
-  let integratorUser = new IntegratorUser();
-  const users = document.querySelectorAll(
-    ".feed-grid > .feed-grid__item .new-item-box__container .web_ui__Cell__cell.web_ui__Cell__narrow.web_ui__Cell__link",
-  );
-  const products = document.querySelectorAll(
-    ".feed-grid > .feed-grid__item > .feed-grid__item-content > .u-flex-grow.u-fill-width > .new-item-box__container .new-item-box__overlay",
-  );
-  const count = users.length;
-  for (let i = 0; i < count; i++) {
-    integratorUser.integrate(users[i] as HTMLBaseElement, products[i] as HTMLBaseElement);
+const firstEnrichment = (delay: number = 2000) => {
+  setTimeout(() => {
+    document.querySelectorAll(`.${CARD_CLASS}`).forEach((element: Element) => {
+      const productCard = element as HTMLBaseElement
+      if (productCard.classList.length === 1) {
+        integrate(productCard)
+      }
+    })
+  }, delay)
+}
+
+const integrate = (productCard: HTMLBaseElement): void => {
+  const user = productCard.querySelector(USER_SELECTOR)
+  const product = productCard.querySelector(PRODUCT_SELECTOR)
+  if (user && product) {
+    integratorUser.integrate(user as HTMLBaseElement, product as HTMLBaseElement)
   }
-};
+}
+
+const observeCatalog = (): void => {
+  if (window.location.href.indexOf('www.vinted.it/catalog') > -1) {
+    // Configuration
+    const config = { attributes: false, childList: true, subtree: true }
+
+    // Callback function to execute when mutations are observed
+    const callback: MutationCallback = (mutationList: MutationRecord[]) => {
+      for (const mutation of mutationList) {
+        if (mutation.removedNodes.length === 0 && mutation.addedNodes.length === 1) {
+          const productCard = mutation.addedNodes[0] as HTMLBaseElement
+          if (productCard.className === CARD_CLASS) {
+            integrate(productCard)
+          }
+        }
+      }
+    }
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback)
+
+    // Start observing the target node for configured mutations
+    observer.observe(document.documentElement || document.body, config)
+  }
+}
 
 // Ignore iframes
-if (window.self === window.top) init();
+if (window.self === window.top) init()

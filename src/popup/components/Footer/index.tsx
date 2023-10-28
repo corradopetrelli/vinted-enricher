@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { Container, BugReport, Version } from "./styles";
+import { Container, BugReport, Version } from './styles'
 
 export const Footer: React.FC = () => {
-  const [version, setVersion] = useState("");
+  const [version, setVersion] = useState('')
 
   useEffect(() => {
-    const manifestData = chrome.runtime.getManifest();
-    setVersion(manifestData.version);
-  }, []);
+    const manifestData = chrome.runtime.getManifest()
+    setVersion(manifestData.version)
+  }, [])
 
   return (
     <Container>
@@ -24,5 +24,5 @@ export const Footer: React.FC = () => {
 
       <Version>v{version}</Version>
     </Container>
-  );
-};
+  )
+}
