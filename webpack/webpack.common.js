@@ -12,7 +12,7 @@ const PATHS = {
 module.exports = {
   entry: {
     content: `${PATHS.src}/content/content.ts`,
-    background: `${PATHS.src}/background/background.ts`,
+    service_worker: `${PATHS.src}/service_worker.ts`,
     popup: `${PATHS.src}/popup/index.tsx`,
   },
   output: {
