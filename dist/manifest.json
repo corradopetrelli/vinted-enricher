@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Free, open source, and privacy-focused browser extension to block \"not safe for work\" content.",
   "author": "Navendu Pottekkat",
-  "permissions": ["<all_urls>", "storage"],
+  "permissions": ["https://www.vinted.*/", "storage"],
   "background": {
-    "scripts": ["src/background.js"],
-    "persistent": true
+    "service_worker": "src/service_worker.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -16,7 +16,7 @@
       "run_at": "document_start"
     }
   ],
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",
@@ -34,7 +34,10 @@
     "64": "images/icon64.png",
     "128": "images/icon128.png"
   },
-  "web_accessible_resources": ["images/*"],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "manifest_version": 2
+  "web_accessible_resources": [{ "resources": ["images/*"], "matches": ["<all_urls>"] }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';",
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+  },
+  "manifest_version": 3
 }
