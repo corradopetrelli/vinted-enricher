@@ -14,10 +14,10 @@ Free and open source browser extension to show additional info of vinted product
 - [Usage](#usage)
 - [Development](#development)
 
-
 # Motivation
 
 I use Vinted everyday for shopping but it don't provide some feature that are very useful to me, like:
+
 - On the catalog I want to see shipping details
 - On the catalog I want to see where the seller is from
 
