@@ -133,12 +133,12 @@ devDependencies:
   webpack-bundle-analyzer:
     specifier: 3.9.0
     version: 3.9.0
-  webpack-chrome-extension-reloader:
-    specifier: 1.3.0
-    version: 1.3.0(webpack@4.42.0)
   webpack-cli:
     specifier: 3.3.11
     version: 3.3.11(webpack@4.42.0)
+  webpack-extension-reloader:
+    specifier: ^1.1.4
+    version: 1.1.4(webpack@4.42.0)
   webpack-merge:
     specifier: 4.2.2
     version: 4.2.2
@@ -533,6 +533,14 @@ packages:
   /@types/uglify-js@3.13.2:
     resolution: {integrity: sha512-/xFrPIo+4zOeNGtVMbf9rUm0N+i4pDf1ynExomqtokIJmVzR3962lJ1UE+MmexMkA0cmN9oTzg5Xcbwge0Ij2Q==}
     dependencies:
+      source-map: 0.6.1
+    dev: true
+
+  /@types/webpack-sources@0.1.11:
+    resolution: {integrity: sha512-r4UVDB0bnzVxu+D+tZPJ7J2CJfsfOoAF9Sdw+Fz6YZ5eBlD+Kj6ValwFUrJc6q2qIBqTugJack2QfZIL1J0rYQ==}
+    dependencies:
+      '@types/node': 17.0.25
+      '@types/source-list-map': 0.1.2
       source-map: 0.6.1
     dev: true
 
@@ -5044,6 +5052,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /lru-cache@4.1.5:
+    resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
+    dependencies:
+      pseudomap: 1.0.2
+      yallist: 2.1.2
+    dev: true
+
   /lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
@@ -5747,6 +5762,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
+  /os-tmpdir@1.0.2:
+    resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /p-cancelable@1.1.0:
     resolution: {integrity: sha512-s73XxOZ4zpt1edZYZzvhqFa6uvQc1vwUa0K0BdtIZgQMAJj9IbebH+JkgKZc9h+B05PKHLOTl4ajG1BmNrVZlw==}
     engines: {node: '>=6'}
@@ -6234,6 +6254,10 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+    dev: true
+
+  /pseudomap@1.0.2:
+    resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
     dev: true
 
   /psl@1.8.0:
@@ -6884,6 +6908,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       semver: 6.3.0
+    dev: true
+
+  /semver@5.5.1:
+    resolution: {integrity: sha512-PqpAxfrEhlSUWge8dwIp4tZnQ25DIOthpiaHNIthsjEFQD6EvqUKUDM7L8O2rShkFccYo1VjJR0coWfNkCubRw==}
+    hasBin: true
     dev: true
 
   /semver@5.7.1:
@@ -7607,6 +7636,13 @@ packages:
       setimmediate: 1.0.5
     dev: true
 
+  /tmp@0.0.33:
+    resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
+    engines: {node: '>=0.6.0'}
+    dependencies:
+      os-tmpdir: 1.0.2
+    dev: true
+
   /tmp@0.2.1:
     resolution: {integrity: sha512-76SUhtfqR2Ijn+xllcI5P1oyannHNHByD80W1q447gU3mp9G9PSpGdWmjUOHRDPiHYacIk66W7ubDTuPF3BEtQ==}
     engines: {node: '>=8.17.0'}
@@ -7923,6 +7959,16 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /useragent@2.3.0:
+    resolution: {integrity: sha512-4AoH4pxuSvHCjqLO04sU6U/uE65BYza8l/KKBS0b0hnUPWi+cQ2BpeTEwejCSx9SPV5/U03nniDTrWx5NrmKdw==}
+    dependencies:
+      lru-cache: 4.1.5
+      request: 2.88.2
+      semver: 5.5.1
+      tmp: 0.0.33
+      yamlparser: 0.0.2
+    dev: true
+
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
@@ -8071,6 +8117,10 @@ packages:
       - utf-8-validate
     dev: true
 
+  /webextension-polyfill@0.5.0:
+    resolution: {integrity: sha512-aFrl38x43t1bTboX/paCT8I97+idzX/TY0+fuM52hrIkCpYfROEF9kSn0BXuEIi3J9LTYt2ZZKkhx9NB1qF3nA==}
+    dev: true
+
   /webidl-conversions@6.1.0:
     resolution: {integrity: sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==}
     engines: {node: '>=10.4'}
@@ -8100,23 +8150,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /webpack-chrome-extension-reloader@1.3.0(webpack@4.42.0):
-    resolution: {integrity: sha512-Q111eKEAUwltk/fgJPcWaGwJb8yBQ/uu/PtK8q1qlxB/AtFuubYqSAd8hlICciadtQExYefYrYaDSnTjFgZDcg==}
-    hasBin: true
-    peerDependencies:
-      webpack: '>=2 <5'
-    dependencies:
-      colors: 1.4.0
-      lodash: 4.17.21
-      minimist: 1.2.6
-      webpack: 4.42.0(webpack-cli@3.3.11)
-      webpack-sources: 1.4.3
-      ws: 6.2.2
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: true
-
   /webpack-cli@3.3.11(webpack@4.42.0):
     resolution: {integrity: sha512-dXlfuml7xvAFwYUPsrtQAA9e4DOe58gnzSxhgrO/ZM/gyXTBowrsYeubyN4mqGhYdpXMFNyQ6emjJS9M7OBd4g==}
     engines: {node: '>=6.11.5'}
@@ -8136,6 +8169,27 @@ packages:
       v8-compile-cache: 2.0.3
       webpack: 4.42.0(webpack-cli@3.3.11)
       yargs: 13.2.4
+    dev: true
+
+  /webpack-extension-reloader@1.1.4(webpack@4.42.0):
+    resolution: {integrity: sha512-PyssJvAiKhztc//QmhpU8yfg7LBR7Bn/cjSM7jadfQJPIDNN1Djxc+SJQRk8uHQ3GQbyWhsWu2DLCMBRcWHIPA==}
+    hasBin: true
+    peerDependencies:
+      webpack: ^4
+    dependencies:
+      '@types/webpack': 4.41.32
+      '@types/webpack-sources': 0.1.11
+      colors: 1.4.0
+      lodash: 4.17.21
+      minimist: 1.2.6
+      useragent: 2.3.0
+      webextension-polyfill: 0.5.0
+      webpack: 4.42.0(webpack-cli@3.3.11)
+      webpack-sources: 1.4.3
+      ws: 7.3.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: true
 
   /webpack-merge@4.2.2:
@@ -8370,12 +8424,20 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /yallist@2.1.2:
+    resolution: {integrity: sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A==}
+    dev: true
+
   /yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
     dev: true
 
   /yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+    dev: true
+
+  /yamlparser@0.0.2:
+    resolution: {integrity: sha512-Cou9FCGblEENtn1/8La5wkDM/ISMh2bzu5Wh7dYzCzA0o9jD4YGyLkUJxe84oPBGoB92f+Oy4ZjVhA8S0C2wlQ==}
     dev: true
 
   /yargs-parser@13.1.2:
