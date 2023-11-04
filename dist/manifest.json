@@ -1,8 +1,8 @@
 {
   "name": "Vinted Enricher",
   "version": "0.0.1",
-  "description": "Free, open source, and privacy-focused browser extension to block \"not safe for work\" content.",
-  "author": "Navendu Pottekkat",
+  "description": "Free and open source browser extension to show additional info of vinted product.",
+  "author": "Corrado Petrelli",
   "permissions": ["https://www.vinted.*/", "storage"],
   "background": {
     "service_worker": "src/service_worker.js",
