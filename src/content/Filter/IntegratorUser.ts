@@ -8,22 +8,20 @@ export class IntegratorUser implements IIntegratorUser {
 
   integrate(user: HTMLBaseElement, product: HTMLBaseElement): void {
     if (user.href?.length > 0) {
-      const userCode = this.vintedCodeExtractor(user.href, 'https://www.vinted.it/member/')
-      const productCode = this.vintedCodeExtractor(product.href, 'https://www.vinted.it/items/')
+      const host = window.location.host
+      const userCode = this.vintedCodeExtractor(user.href, `https://${host}/member/`)
+      const productCode = this.vintedCodeExtractor(product.href, `https://${host}/items/`)
 
       Promise.all([
-        fetch(`https://www.vinted.it/api/v2/users/${userCode}`).then((value) => value.json()),
-        fetch(`https://www.vinted.it/api/v2/items/${productCode}/shipping_details`).then((value) => value.json()),
-      ]).then(([resultUser, resultProduct]) => {
-        const serverUser = resultUser
-        const serverProducts = resultProduct
-
+        fetch(`https://${host}/api/v2/users/${userCode}`).then((value) => value.json()),
+        fetch(`https://${host}/api/v2/items/${productCode}/shipping_details`).then((value) => value.json()),
+      ]).then(([serverUser, serverProducts]) => {
         const flag = this.getFlagEmoji(serverUser.user?.country_iso_code)
-        let shippingPrice = serverProducts.shipping_details.price
-        shippingPrice = shippingPrice < 0.1 ? '🆓' : shippingPrice
-
+        const shippingCurrency: string = serverProducts.shipping_details.currency
+        const shippingPrice: number = serverProducts.shipping_details.price
+        const shippingText: string = this.getPriceText(shippingPrice, shippingCurrency)
         user.querySelectorAll(IntegratorUser.USER_LINK_SELECTOR)[0].innerHTML += ' ' + flag
-        user.querySelectorAll(IntegratorUser.PRODUCT_LINK_SELECTOR)[0].innerHTML += ' ' + shippingPrice
+        user.querySelectorAll(IntegratorUser.PRODUCT_LINK_SELECTOR)[0].innerHTML += ' ' + shippingText
       })
     }
   }
@@ -40,5 +38,16 @@ export class IntegratorUser implements IIntegratorUser {
       .split('')
       .map((char) => 127397 + char.charCodeAt(0))
     return String.fromCodePoint(...codePoints)
+  }
+
+  private getPriceText(shippingPrice: number, shippingCurrency: string = 'EUR'): string {
+    if (shippingPrice < 0.1) {
+      return '🆓'
+    } else {
+      return new Intl.NumberFormat(navigator.language, {
+        style: 'currency',
+        currency: shippingCurrency,
+      }).format(shippingPrice)
+    }
   }
 }

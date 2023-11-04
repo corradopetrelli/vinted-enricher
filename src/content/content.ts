@@ -31,7 +31,7 @@ const integrate = (productCard: HTMLBaseElement): void => {
 }
 
 const observeCatalog = (): void => {
-  if (window.location.href.indexOf('www.vinted.it/catalog') > -1) {
+  if (window.location.href.indexOf(`${window.location.host}/catalog`) > -1) {
     // Configuration
     const config = { attributes: false, childList: true, subtree: true }
 
